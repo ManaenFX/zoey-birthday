@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,11 @@
 <title>Zoey's Birthday Countdown 🎂</title>
 
 <style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -40,26 +46,278 @@ body {
 
 
 /* =====================================================
-   PARTICLES
+   OPENING ANIMATION
 ===================================================== */
 
-#particles {
+#openingScreen {
     position: fixed;
     inset: 0;
 
+    z-index: 50000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 20, 147, .13),
+            transparent 35%
+        ),
+        #050008;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#openingScreen.hide {
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
+}
+
+.opening-content {
+    position: relative;
+    z-index: 3;
+
+    width: min(600px, 90%);
+
+    text-align: center;
+
+    animation:
+        openingContentIn 1.4s ease;
+}
+
+@keyframes openingContentIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* glowing heart */
+
+.opening-heart {
+    font-size: 85px;
+
+    filter:
+        drop-shadow(
+            0 0 25px rgba(255, 40, 160, .75)
+        );
+
+    animation:
+        heartFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes heartFloat {
+
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-12px) scale(1.08);
+    }
+}
+
+
+/* first message */
+
+.opening-content h1 {
+
+    margin-top: 25px;
+
+    font-size:
+        clamp(40px, 8vw, 70px);
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ff71bd,
+            #d88aff,
+            #fff
+        );
+
+    background-size: 300%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        openingGradient 5s linear infinite;
+}
+
+@keyframes openingGradient {
+
+    from {
+        background-position: 0%;
+    }
+
+    to {
+        background-position: 300%;
+    }
+}
+
+.opening-content p {
+
+    margin-top: 18px;
+
+    color: #bdbdbd;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* enter button */
+
+.enter-button {
+
+    margin-top: 35px;
+
+    padding:
+        15px 28px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,20,147,.25),
+            rgba(130,40,255,.22)
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 35px
+        rgba(255,20,147,.15);
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
+}
+
+.enter-button:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 50px
+        rgba(255,20,147,.3);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,20,147,.35),
+            rgba(130,40,255,.32)
+        );
+}
+
+.enter-button:active {
+
+    transform:
+        scale(.96);
+}
+
+
+/* opening particles */
+
+.opening-particle {
+
+    position: absolute;
+
+    bottom: -30px;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    animation:
+        openingRise linear forwards;
+}
+
+@keyframes openingRise {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .8;
+    }
+
+    85% {
+        opacity: .5;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   BACKGROUND PARTICLES
+===================================================== */
+
+#particles {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
     overflow: hidden;
 
     z-index: 0;
 }
 
 .particle {
+
     position: absolute;
+
     bottom: -40px;
 
     opacity: 0;
 
-    animation: rise linear forwards;
+    animation:
+        rise linear forwards;
 }
 
 @keyframes rise {
@@ -91,18 +349,22 @@ body {
 
 
 /* =====================================================
-   PAGE
+   MAIN PAGE
 ===================================================== */
 
 .page {
+
     position: relative;
+
     z-index: 2;
 
-    width: min(1050px, 92%);
+    width:
+        min(1050px, 92%);
 
     margin: auto;
 
-    padding: 45px 0 80px;
+    padding:
+        45px 0 80px;
 }
 
 
@@ -116,7 +378,8 @@ body {
 
     margin: auto;
 
-    padding: 9px 17px;
+    padding:
+        9px 17px;
 
     border-radius: 30px;
 
@@ -124,7 +387,8 @@ body {
         rgba(255,255,255,.06);
 
     border:
-        1px solid rgba(255,255,255,.12);
+        1px solid
+        rgba(255,255,255,.12);
 
     color: #ff8dce;
 
@@ -134,7 +398,8 @@ body {
 
     text-transform: uppercase;
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 }
 
 
@@ -155,14 +420,12 @@ body {
     font-size: 75px;
 
     animation:
-        cakeFloat 3s
-        ease-in-out
-        infinite;
+        cakeFloat 3s ease-in-out infinite;
 }
 
 @keyframes cakeFloat {
 
-    0%,100% {
+    0%, 100% {
         transform:
             translateY(0);
     }
@@ -197,9 +460,7 @@ body {
     -webkit-text-fill-color: transparent;
 
     animation:
-        gradientMove 5s
-        linear
-        infinite;
+        gradientMove 5s linear infinite;
 }
 
 @keyframes gradientMove {
@@ -247,11 +508,15 @@ body {
         );
 
     border:
-        1px solid rgba(255,255,255,.12);
+        1px solid
+        rgba(255,255,255,.12);
 
     box-shadow:
-        0 0 60px rgba(255,0,150,.08),
-        inset 0 0 40px rgba(255,255,255,.015);
+        0 0 60px
+        rgba(255,0,150,.08),
+
+        inset 0 0 40px
+        rgba(255,255,255,.015);
 
     backdrop-filter:
         blur(15px);
@@ -320,7 +585,7 @@ body {
 
 
 /* =====================================================
-   LOCK
+   LOCK STATUS
 ===================================================== */
 
 .lock-status {
@@ -337,13 +602,12 @@ body {
     font-size: 28px;
 
     animation:
-        lockPulse 2s
-        infinite;
+        lockPulse 2s infinite;
 }
 
 @keyframes lockPulse {
 
-    0%,100% {
+    0%, 100% {
         transform:
             scale(1);
     }
@@ -363,7 +627,7 @@ body {
 
 
 /* =====================================================
-   BUTTONS
+   BUTTON GRID
 ===================================================== */
 
 .buttons {
@@ -387,7 +651,8 @@ body {
 
     min-height: 145px;
 
-    padding: 25px 18px;
+    padding:
+        25px 18px;
 
     border:
         1px solid
@@ -485,8 +750,7 @@ body {
         scale(0);
 
     animation:
-        buttonRipple .65s
-        ease-out;
+        buttonRipple .65s ease-out;
 }
 
 @keyframes buttonRipple {
@@ -573,8 +837,7 @@ body {
 
     overflow: hidden;
 
-    background:
-        #121212;
+    background: #121212;
 }
 
 #spotifyEmbed {
@@ -693,8 +956,7 @@ body {
         translateY(30px)
         scale(.9);
 
-    transition:
-        .4s;
+    transition: .4s;
 }
 
 .modal.show .modal-card {
@@ -709,8 +971,7 @@ body {
     font-size: 65px;
 
     animation:
-        modalIcon .8s
-        ease;
+        modalIcon .8s ease;
 }
 
 @keyframes modalIcon {
@@ -780,7 +1041,7 @@ body {
 
 
 /* =====================================================
-   BIRTHDAY
+   BIRTHDAY UNLOCK
 ===================================================== */
 
 #birthdayUnlocked {
@@ -808,8 +1069,7 @@ body {
         rgba(255,255,255,.12);
 
     animation:
-        birthdayReveal 1s
-        ease;
+        birthdayReveal 1s ease;
 }
 
 @keyframes birthdayReveal {
@@ -973,7 +1233,18 @@ footer span {
 
         font-size: 60px;
     }
+
+    .opening-heart {
+
+        font-size: 70px;
+    }
+
+    .opening-content p {
+
+        font-size: 15px;
+    }
 }
+
 </style>
 </head>
 
@@ -982,16 +1253,52 @@ footer span {
 
 
 <!-- =====================================================
-     PARTICLES
+     OPENING SCREEN
+===================================================== -->
+
+<div id="openingScreen">
+
+    <div class="opening-content">
+
+        <div class="opening-heart">
+            💗
+        </div>
+
+        <h1>
+            Hey Zoey...
+        </h1>
+
+        <p>
+            I made something for you. 👀
+            <br>
+            But you'll have to enter to see it.
+        </p>
+
+        <button
+            class="enter-button"
+            onclick="enterBirthdaySite()"
+        >
+            ✨ Enter Your Surprise
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BACKGROUND PARTICLES
 ===================================================== -->
 
 <div id="particles"></div>
 
 
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
 <main class="page">
 
-
-    <!-- TOP BADGE -->
 
     <div
         class="top-badge"
@@ -1032,7 +1339,6 @@ footer span {
 
 
         <div class="countdown">
-
 
             <div class="time-box">
 
@@ -1118,9 +1424,7 @@ footer span {
     </section>
 
 
-    <!-- =================================================
-         BUTTONS
-    ================================================= -->
+    <!-- BUTTONS -->
 
     <section class="buttons">
 
@@ -1208,9 +1512,7 @@ footer span {
     </section>
 
 
-    <!-- =================================================
-         MUSIC
-    ================================================= -->
+    <!-- MUSIC -->
 
     <section class="music-section">
 
@@ -1258,9 +1560,7 @@ footer span {
     </section>
 
 
-    <!-- =================================================
-         BIRTHDAY UNLOCK
-    ================================================= -->
+    <!-- BIRTHDAY UNLOCK -->
 
     <section id="birthdayUnlocked">
 
@@ -1293,9 +1593,7 @@ footer span {
             </p>
 
 
-            <div
-                id="birthdaySpotify"
-            ></div>
+            <div id="birthdaySpotify"></div>
 
         </div>
 
@@ -1353,7 +1651,7 @@ footer span {
 
 
 <!-- =====================================================
-     SPOTIFY IFRAME API
+     SPOTIFY
 ===================================================== -->
 
 <script
@@ -1365,13 +1663,144 @@ footer span {
 <script>
 
 /* =====================================================
-   SETTINGS
+   OPENING SCREEN
 ===================================================== */
 
+function enterBirthdaySite() {
 
-/*
-   September 5, 2026 at midnight.
-*/
+    const opening =
+        document.getElementById(
+            "openingScreen"
+        );
+
+
+    /*
+       Add a final little burst
+       before the screen disappears.
+    */
+
+    for (
+        let i = 0;
+        i < 20;
+        i++
+    ) {
+
+        createOpeningParticle();
+
+    }
+
+
+    opening.classList.add(
+        "hide"
+    );
+
+
+    /*
+       Remember that the intro was entered
+       during this page session.
+    */
+
+    sessionStorage.setItem(
+        "zoeyIntroSeen",
+        "true"
+    );
+
+}
+
+
+/* =====================================================
+   OPENING PARTICLES
+===================================================== */
+
+function createOpeningParticle() {
+
+    const particle =
+        document.createElement(
+            "div"
+        );
+
+
+    particle.className =
+        "opening-particle";
+
+
+    const choices = [
+        "❤️",
+        "💗",
+        "✨",
+        "💖",
+        "⭐"
+    ];
+
+
+    particle.textContent =
+        choices[
+            Math.floor(
+                Math.random() *
+                choices.length
+            )
+        ];
+
+
+    particle.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    particle.style.fontSize =
+        (
+            12 +
+            Math.random() * 22
+        ) +
+        "px";
+
+
+    particle.style.animationDuration =
+        (
+            2 +
+            Math.random() * 3
+        ) +
+        "s";
+
+
+    document
+        .getElementById(
+            "openingScreen"
+        )
+        .appendChild(
+            particle
+        );
+
+
+    setTimeout(
+        () => particle.remove(),
+        6000
+    );
+
+}
+
+
+/* =====================================================
+   CREATE OPENING PARTICLES
+===================================================== */
+
+for (
+    let i = 0;
+    i < 18;
+    i++
+) {
+
+    setTimeout(
+        createOpeningParticle,
+        i * 250
+    );
+
+}
+
+
+/* =====================================================
+   SPOTIFY SETTINGS
+===================================================== */
 
 const birthday =
     new Date(
@@ -1385,65 +1814,79 @@ const birthday =
 
 
 /*
-   ======================================================
-   PRE-BIRTHDAY SONGS
-   ======================================================
-
-   ONLY these songs can be randomly selected
+   These are the ONLY songs available
    before September 5.
-
-   The secret song is NOT inside this list.
 */
 
 const preBirthdaySongs = [
 
     {
-        id: "7so0lgd0zP2Sbgs2d7a1SZ",
-        title: "Die With A Smile",
-        artist: "Lady Gaga & Bruno Mars"
+        id:
+            "7so0lgd0zP2Sbgs2d7a1SZ",
+
+        title:
+            "Die With A Smile",
+
+        artist:
+            "Lady Gaga & Bruno Mars"
     },
 
-    {
-        id: "5t3wm3T4zHoMjOK1jUiBp8",
-        title: "Love Me Not",
-        artist: "Ravyn Lenae"
-    },
 
     {
-        id: "2oAE6v92E9WUEILL0LFQAR",
-        title: "End of Beginning",
-        artist: "Djo"
+        id:
+            "5t3wm3T4zHoMjOK1jUiBp8",
+
+        title:
+            "Love Me Not",
+
+        artist:
+            "Ravyn Lenae"
+    },
+
+
+    {
+        id:
+            "2oAE6v92E9WUEILL0LFQAR",
+
+        title:
+            "End of Beginning",
+
+        artist:
+            "Djo"
     }
 
 ];
 
 
 /*
-   ======================================================
    SECRET SONG
-   ======================================================
 
-   NEVER randomly selected before birthday.
+   This is NOT part of the random list.
 */
 
 const secretSong = {
 
-    id: "3eBUZy4oiQGhOMirK5cZmO",
+    id:
+        "3eBUZy4oiQGhOMirK5cZmO",
 
-    title: "Thick Of It",
+    title:
+        "Thick Of It",
 
-    artist: "KSI"
+    artist:
+        "KSI"
 
 };
 
 
 /* =====================================================
-   GLOBAL VARIABLES
+   GLOBALS
 ===================================================== */
 
 let spotifyAPI = null;
 
 let spotifyController = null;
+
+let birthdayController = null;
 
 let birthdayUnlocked = false;
 
@@ -1470,16 +1913,20 @@ function updateCountdown() {
     const now =
         new Date();
 
+
     const difference =
         birthday.getTime() -
         now.getTime();
 
 
-    if (difference <= 0) {
+    if (
+        difference <= 0
+    ) {
 
         unlockBirthday();
 
         return;
+
     }
 
 
@@ -1497,15 +1944,15 @@ function updateCountdown() {
 
     const hours =
         Math.floor(
-            (totalSeconds % 86400)
-            / 3600
+            (totalSeconds % 86400) /
+            3600
         );
 
 
     const minutes =
         Math.floor(
-            (totalSeconds % 3600)
-            / 60
+            (totalSeconds % 3600) /
+            60
         );
 
 
@@ -1560,13 +2007,17 @@ updateCountdown();
 
 
 /* =====================================================
-   UNLOCK BIRTHDAY
+   BIRTHDAY UNLOCK
 ===================================================== */
 
 function unlockBirthday() {
 
-    if (birthdayUnlocked) {
+    if (
+        birthdayUnlocked
+    ) {
+
         return;
+
     }
 
 
@@ -1611,23 +2062,18 @@ function unlockBirthday() {
         "🎉 Birthday Unlocked";
 
 
-    const birthdaySection =
-        document.getElementById(
-            "birthdayUnlocked"
-        );
-
-
-    birthdaySection.style.display =
+    document.getElementById(
+        "birthdayUnlocked"
+    ).style.display =
         "block";
 
 
     /*
-       If Spotify is already ready,
-       switch the player to the secret song.
+       If the countdown Spotify player exists,
+       switch it to the secret song.
     */
 
     if (
-        spotifyReady &&
         spotifyController
     ) {
 
@@ -1640,7 +2086,24 @@ function unlockBirthday() {
 
 
     /*
-       Celebration particles.
+       If the dedicated birthday player
+       exists, load the secret song there too.
+    */
+
+    if (
+        birthdayController
+    ) {
+
+        birthdayController.loadEntity(
+            "spotify:track:" +
+            secretSong.id
+        );
+
+    }
+
+
+    /*
+       Celebration.
     */
 
     for (
@@ -1666,12 +2129,9 @@ window.onSpotifyIframeApiReady =
         spotifyAPI =
             IFrameAPI;
 
+
         spotifyReady = true;
 
-
-        /*
-           Birthday has priority.
-        */
 
         if (
             isBirthdayUnlocked()
@@ -1708,13 +2168,15 @@ function createCountdownPlayer() {
     ) {
 
         return;
+
     }
 
 
     /*
        IMPORTANT:
-       This function can ONLY choose
-       from preBirthdaySongs.
+
+       getRandomSong() can ONLY return
+       songs from preBirthdaySongs.
     */
 
     const song =
@@ -1770,6 +2232,7 @@ function createBirthdayPlayer() {
     ) {
 
         return;
+
     }
 
 
@@ -1791,15 +2254,8 @@ function createBirthdayPlayer() {
 
         function(controller) {
 
-            /*
-               This is the dedicated birthday
-               player for Thick Of It.
-            */
-
-            controller.loadEntity(
-                "spotify:track:" +
-                secretSong.id
-            );
+            birthdayController =
+                controller;
 
         }
 
@@ -1815,23 +2271,9 @@ function createBirthdayPlayer() {
 function getRandomSong() {
 
     /*
-       EXTRA SAFETY:
-       Never allow secret song before birthday.
+       Secret song is deliberately NOT
+       included in this array.
     */
-
-    if (
-        isBirthdayUnlocked()
-    ) {
-
-        return preBirthdaySongs[
-            Math.floor(
-                Math.random() *
-                preBirthdaySongs.length
-            )
-        ];
-
-    }
-
 
     const index =
         Math.floor(
@@ -1868,27 +2310,19 @@ function showNowPlaying(song) {
 
 function shuffleSong() {
 
-    /*
-       Once birthday arrives,
-       don't randomly change the secret song.
-    */
-
     if (
         birthdayUnlocked ||
         isBirthdayUnlocked()
     ) {
 
         showModal(
-
             "🎂",
-
             "Birthday Mode",
-
             "The countdown is finished. Her secret song is now unlocked! ❤️"
-
         );
 
         return;
+
     }
 
 
@@ -1922,17 +2356,13 @@ function shuffleSong() {
     showNowPlaying(song);
 
 
-    /*
-       Change the current Spotify player.
-    */
-
-    if (spotifyController) {
+    if (
+        spotifyController
+    ) {
 
         spotifyController.loadEntity(
-
             "spotify:track:" +
             song.id
-
         );
 
     }
@@ -1944,11 +2374,10 @@ function shuffleSong() {
    LOCKED BUTTONS
 ===================================================== */
 
-function openLocked(type, button) {
-
-    /*
-       Button ripple.
-    */
+function openLocked(
+    type,
+    button
+) {
 
     if (button) {
 
@@ -1971,16 +2400,15 @@ function openLocked(type, button) {
     }
 
 
-    /*
-       Birthday version.
-    */
-
     if (
         birthdayUnlocked ||
         isBirthdayUnlocked()
     ) {
 
-        if (type === "letter") {
+
+        if (
+            type === "letter"
+        ) {
 
             showModal(
                 "💌",
@@ -1991,7 +2419,9 @@ function openLocked(type, button) {
         }
 
 
-        if (type === "gift") {
+        if (
+            type === "gift"
+        ) {
 
             showModal(
                 "🎁",
@@ -2002,7 +2432,9 @@ function openLocked(type, button) {
         }
 
 
-        if (type === "memories") {
+        if (
+            type === "memories"
+        ) {
 
             showModal(
                 "📸",
@@ -2013,7 +2445,9 @@ function openLocked(type, button) {
         }
 
 
-        if (type === "song") {
+        if (
+            type === "song"
+        ) {
 
             showModal(
                 "🎵",
@@ -2025,14 +2459,13 @@ function openLocked(type, button) {
 
 
         return;
+
     }
 
 
-    /*
-       BEFORE BIRTHDAY
-    */
-
-    if (type === "letter") {
+    if (
+        type === "letter"
+    ) {
 
         showModal(
             "💌",
@@ -2043,7 +2476,9 @@ function openLocked(type, button) {
     }
 
 
-    if (type === "gift") {
+    if (
+        type === "gift"
+    ) {
 
         showModal(
             "🎁",
@@ -2054,7 +2489,9 @@ function openLocked(type, button) {
     }
 
 
-    if (type === "memories") {
+    if (
+        type === "memories"
+    ) {
 
         showModal(
             "📸",
@@ -2065,7 +2502,9 @@ function openLocked(type, button) {
     }
 
 
-    if (type === "song") {
+    if (
+        type === "song"
+    ) {
 
         showModal(
             "🔐",
@@ -2126,10 +2565,6 @@ function closeModal() {
 }
 
 
-/*
-   Close modal by clicking outside.
-*/
-
 document.getElementById(
     "modal"
 ).addEventListener(
@@ -2149,7 +2584,7 @@ document.getElementById(
 
 
 /* =====================================================
-   FLOATING PARTICLES
+   BACKGROUND PARTICLES
 ===================================================== */
 
 function createParticle(
@@ -2218,11 +2653,7 @@ function createParticle(
 
 
     setTimeout(
-        () => {
-
-            particle.remove();
-
-        },
+        () => particle.remove(),
         10000
     );
 
@@ -2236,28 +2667,12 @@ setInterval(
 
 
 /* =====================================================
-   SECRET SONG SAFETY
-===================================================== */
-
-function canPlaySecretSong() {
-
-    return isBirthdayUnlocked();
-
-}
-
-
-/* =====================================================
-   FINAL STARTUP CHECK
+   STARTUP
 ===================================================== */
 
 if (
     isBirthdayUnlocked()
 ) {
-
-    /*
-       Don't wait for the countdown
-       to discover the birthday.
-    */
 
     unlockBirthday();
 
@@ -2268,3 +2683,4 @@ if (
 
 </body>
 </html>
+
