@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zoey's Birthday Countdown 🎂</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 40, 160, .18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(130, 40, 255, .15),
+            transparent 35%
+        ),
+        #08000f;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+#particles {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+    overflow: hidden;
+
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    bottom: -40px;
+
+    opacity: 0;
+
+    animation: rise linear forwards;
+}
+
+@keyframes rise {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .8;
+    }
+
+    90% {
+        opacity: .5;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+    position: relative;
+    z-index: 2;
+
+    width: min(1050px, 92%);
+
+    margin: auto;
+
+    padding: 45px 0 80px;
+}
+
+
+/* =====================================================
+   TOP BADGE
+===================================================== */
+
+.top-badge {
+
+    width: fit-content;
+
+    margin: auto;
+
+    padding: 9px 17px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    color: #ff8dce;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    backdrop-filter: blur(10px);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+
+    text-align: center;
+
+    padding:
+        55px 10px 35px;
+}
+
+.header .cake {
+
+    font-size: 75px;
+
+    animation:
+        cakeFloat 3s
+        ease-in-out
+        infinite;
+}
+
+@keyframes cakeFloat {
+
+    0%,100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+.header h1 {
+
+    margin-top: 15px;
+
+    font-size:
+        clamp(40px, 8vw, 78px);
+
+    line-height: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ff71bd,
+            #d88aff,
+            #fff
+        );
+
+    background-size: 300%;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        gradientMove 5s
+        linear
+        infinite;
+}
+
+@keyframes gradientMove {
+
+    from {
+        background-position: 0%;
+    }
+
+    to {
+        background-position: 300%;
+    }
+}
+
+.header p {
+
+    margin-top: 20px;
+
+    color: #c9c9c9;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+.countdown-card {
+
+    max-width: 900px;
+
+    margin:
+        25px auto 0;
+
+    padding:
+        35px 20px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,20,147,.11),
+            rgba(130,40,255,.09)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 0 60px rgba(255,0,150,.08),
+        inset 0 0 40px rgba(255,255,255,.015);
+
+    backdrop-filter:
+        blur(15px);
+}
+
+.countdown-title {
+
+    text-align: center;
+
+    color: #ff8dcc;
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 25px;
+}
+
+.countdown {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.time-box {
+
+    text-align: center;
+}
+
+.time-number {
+
+    display: block;
+
+    font-size:
+        clamp(35px, 7vw, 65px);
+
+    font-weight: 800;
+
+    color: white;
+
+    text-shadow:
+        0 0 20px
+        rgba(255,50,170,.35);
+}
+
+.time-label {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #999;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   LOCK
+===================================================== */
+
+.lock-status {
+
+    text-align: center;
+
+    margin-top: 30px;
+}
+
+.lock-icon {
+
+    display: inline-block;
+
+    font-size: 28px;
+
+    animation:
+        lockPulse 2s
+        infinite;
+}
+
+@keyframes lockPulse {
+
+    0%,100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.15);
+    }
+}
+
+.lock-status p {
+
+    margin-top: 8px;
+
+    color: #aaa;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.buttons {
+
+    margin-top: 50px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(210px, 1fr)
+        );
+
+    gap: 18px;
+}
+
+.cool-button {
+
+    position: relative;
+
+    min-height: 145px;
+
+    padding: 25px 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.11);
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.025)
+        );
+
+    color: white;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform .25s,
+        border-color .25s,
+        box-shadow .25s;
+}
+
+.cool-button:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(255,80,180,.4);
+
+    box-shadow:
+        0 15px 40px
+        rgba(255,0,140,.12);
+}
+
+.cool-button:active {
+
+    transform:
+        scale(.96);
+}
+
+.cool-button .icon {
+
+    display: block;
+
+    font-size: 38px;
+
+    margin-bottom: 12px;
+}
+
+.cool-button strong {
+
+    display: block;
+
+    font-size: 17px;
+}
+
+.cool-button small {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: #999;
+}
+
+
+/* =====================================================
+   RIPPLE
+===================================================== */
+
+.cool-button.opening::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.8);
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    animation:
+        buttonRipple .65s
+        ease-out;
+}
+
+@keyframes buttonRipple {
+
+    0% {
+
+        opacity: .8;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(35);
+    }
+}
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+.music-section {
+
+    margin-top: 65px;
+
+    padding: 30px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+}
+
+.section-heading {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+
+    font-size: 28px;
+}
+
+.section-heading p {
+
+    margin-top: 8px;
+
+    color: #999;
+}
+
+.now-playing {
+
+    text-align: center;
+
+    margin: 20px 0;
+
+    color: #ff8dcc;
+
+    font-size: 14px;
+
+    min-height: 20px;
+}
+
+.spotify-box {
+
+    width: 100%;
+
+    min-height: 152px;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background:
+        #121212;
+}
+
+#spotifyEmbed {
+
+    width: 100%;
+
+    min-height: 152px;
+}
+
+.shuffle-row {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+.shuffle-button {
+
+    padding:
+        13px 22px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.shuffle-button:hover {
+
+    background:
+        rgba(255,20,147,.16);
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background:
+        rgba(0,0,0,.75);
+
+    backdrop-filter:
+        blur(10px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity .35s,
+        visibility .35s;
+}
+
+.modal.show {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.modal-card {
+
+    width:
+        min(500px, 100%);
+
+    padding:
+        40px 25px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19001f,
+            #0d0015
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    box-shadow:
+        0 0 80px
+        rgba(255,0,150,.18);
+
+    transform:
+        translateY(30px)
+        scale(.9);
+
+    transition:
+        .4s;
+}
+
+.modal.show .modal-card {
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.modal-icon {
+
+    font-size: 65px;
+
+    animation:
+        modalIcon .8s
+        ease;
+}
+
+@keyframes modalIcon {
+
+    0% {
+
+        transform:
+            scale(.2)
+            rotate(-20deg);
+
+        opacity: 0;
+    }
+
+    60% {
+
+        transform:
+            scale(1.2)
+            rotate(8deg);
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0);
+
+        opacity: 1;
+    }
+}
+
+.modal-card h2 {
+
+    margin-top: 15px;
+
+    font-size: 30px;
+}
+
+.modal-card p {
+
+    margin-top: 15px;
+
+    color: #bbb;
+
+    line-height: 1.7;
+}
+
+.close-button {
+
+    margin-top: 25px;
+
+    padding:
+        12px 22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        #ff1493;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   BIRTHDAY
+===================================================== */
+
+#birthdayUnlocked {
+
+    display: none;
+
+    text-align: center;
+
+    margin-top: 40px;
+
+    padding:
+        55px 20px;
+
+    border-radius: 35px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,20,147,.18),
+            transparent 60%
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    animation:
+        birthdayReveal 1s
+        ease;
+}
+
+@keyframes birthdayReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.9);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+#birthdayUnlocked .birthday-cake {
+
+    font-size: 75px;
+}
+
+#birthdayUnlocked h2 {
+
+    margin-top: 15px;
+
+    font-size:
+        clamp(35px, 8vw, 65px);
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ff5db5,
+            #c780ff
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color:
+        transparent;
+}
+
+#birthdayUnlocked p {
+
+    margin-top: 15px;
+
+    color: #ccc;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   SECRET SONG
+===================================================== */
+
+.secret-song {
+
+    margin-top: 35px;
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+}
+
+.secret-song h3 {
+
+    font-size: 22px;
+}
+
+.secret-song p {
+
+    margin-top: 8px;
+
+    color: #aaa;
+}
+
+#birthdaySpotify {
+
+    margin-top: 20px;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    text-align: center;
+
+    margin-top: 80px;
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+footer span {
+
+    color: #ff4daa;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:650px) {
+
+    .page {
+
+        width: 94%;
+
+        padding-top: 25px;
+    }
+
+    .countdown {
+
+        gap: 7px;
+    }
+
+    .time-number {
+
+        font-size: 35px;
+    }
+
+    .time-label {
+
+        font-size: 9px;
+
+        letter-spacing: 1px;
+    }
+
+    .music-section {
+
+        padding:
+            20px 13px;
+    }
+
+    .header {
+
+        padding-top: 45px;
+    }
+
+    .header .cake {
+
+        font-size: 60px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PARTICLES
+===================================================== -->
+
+<div id="particles"></div>
+
+
+<main class="page">
+
+
+    <!-- TOP BADGE -->
+
+    <div
+        class="top-badge"
+        id="topBadge"
+    >
+        🔒 Birthday Surprise Loading
+    </div>
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="cake">
+            🎂
+        </div>
+
+        <h1>
+            Zoey's Birthday
+        </h1>
+
+        <p>
+            Something special is waiting...
+            <br>
+            but not quite yet. 👀
+        </p>
+
+    </header>
+
+
+    <!-- COUNTDOWN -->
+
+    <section class="countdown-card">
+
+        <div class="countdown-title">
+            Countdown to September 5
+        </div>
+
+
+        <div class="countdown">
+
+
+            <div class="time-box">
+
+                <span
+                    id="days"
+                    class="time-number"
+                >
+                    00
+                </span>
+
+                <span class="time-label">
+                    Days
+                </span>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <span
+                    id="hours"
+                    class="time-number"
+                >
+                    00
+                </span>
+
+                <span class="time-label">
+                    Hours
+                </span>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <span
+                    id="minutes"
+                    class="time-number"
+                >
+                    00
+                </span>
+
+                <span class="time-label">
+                    Minutes
+                </span>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <span
+                    id="seconds"
+                    class="time-number"
+                >
+                    00
+                </span>
+
+                <span class="time-label">
+                    Seconds
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="lock-status">
+
+            <div
+                id="lockIcon"
+                class="lock-icon"
+            >
+                🔒
+            </div>
+
+            <p id="lockText">
+                The birthday surprise is locked.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         BUTTONS
+    ================================================= -->
+
+    <section class="buttons">
+
+
+        <button
+            class="cool-button"
+            onclick="openLocked('letter', this)"
+        >
+
+            <span class="icon">
+                💌
+            </span>
+
+            <strong>
+                A Sealed Letter
+            </strong>
+
+            <small>
+                Open it... if you dare 👀
+            </small>
+
+        </button>
+
+
+        <button
+            class="cool-button"
+            onclick="openLocked('gift', this)"
+        >
+
+            <span class="icon">
+                🎁
+            </span>
+
+            <strong>
+                Mystery Gift
+            </strong>
+
+            <small>
+                Something is inside...
+            </small>
+
+        </button>
+
+
+        <button
+            class="cool-button"
+            onclick="openLocked('memories', this)"
+        >
+
+            <span class="icon">
+                📸
+            </span>
+
+            <strong>
+                Hidden Memories
+            </strong>
+
+            <small>
+                Not ready yet 🔒
+            </small>
+
+        </button>
+
+
+        <button
+            class="cool-button"
+            onclick="openLocked('song', this)"
+        >
+
+            <span class="icon">
+                🎵
+            </span>
+
+            <strong>
+                The Secret Song
+            </strong>
+
+            <small>
+                Her favorite is locked.
+            </small>
+
+        </button>
+
+
+    </section>
+
+
+    <!-- =================================================
+         MUSIC
+    ================================================= -->
+
+    <section class="music-section">
+
+
+        <div class="section-heading">
+
+            <h2>
+                🎵 Countdown Music
+            </h2>
+
+            <p>
+                A random song from the countdown selection.
+            </p>
+
+        </div>
+
+
+        <div
+            id="nowPlaying"
+            class="now-playing"
+        >
+            🎲 Choosing a song...
+        </div>
+
+
+        <div class="spotify-box">
+
+            <div id="spotifyEmbed"></div>
+
+        </div>
+
+
+        <div class="shuffle-row">
+
+            <button
+                class="shuffle-button"
+                id="shuffleButton"
+                onclick="shuffleSong()"
+            >
+                🔀 Shuffle Song
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         BIRTHDAY UNLOCK
+    ================================================= -->
+
+    <section id="birthdayUnlocked">
+
+
+        <div class="birthday-cake">
+            🎂
+        </div>
+
+
+        <h2>
+            HAPPY BIRTHDAY ZOEY!
+        </h2>
+
+
+        <p>
+            September 5 has arrived. ❤️
+            <br>
+            The surprise is officially unlocked.
+        </p>
+
+
+        <div class="secret-song">
+
+            <h3>
+                🔓 Her Secret Song
+            </h3>
+
+            <p>
+                Thick Of It — KSI
+            </p>
+
+
+            <div
+                id="birthdaySpotify"
+            ></div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        Made with ❤️ for September 5
+    </footer>
+
+</main>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    id="modal"
+    class="modal"
+>
+
+    <div class="modal-card">
+
+
+        <div
+            id="modalIcon"
+            class="modal-icon"
+        >
+            🔒
+        </div>
+
+
+        <h2 id="modalTitle">
+            Locked
+        </h2>
+
+
+        <p id="modalText">
+            Not yet...
+        </p>
+
+
+        <button
+            class="close-button"
+            onclick="closeModal()"
+        >
+            Got it 👀
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SPOTIFY IFRAME API
+===================================================== -->
+
+<script
+    src="https://open.spotify.com/embed/iframe-api/v1"
+    async>
+</script>
+
+
+<script>
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+
+/*
+   September 5, 2026 at midnight.
+*/
+
+const birthday =
+    new Date(
+        2026,
+        8,
+        5,
+        0,
+        0,
+        0
+    );
+
+
+/*
+   ======================================================
+   PRE-BIRTHDAY SONGS
+   ======================================================
+
+   ONLY these songs can be randomly selected
+   before September 5.
+
+   The secret song is NOT inside this list.
+*/
+
+const preBirthdaySongs = [
+
+    {
+        id: "7so0lgd0zP2Sbgs2d7a1SZ",
+        title: "Die With A Smile",
+        artist: "Lady Gaga & Bruno Mars"
+    },
+
+    {
+        id: "5t3wm3T4zHoMjOK1jUiBp8",
+        title: "Love Me Not",
+        artist: "Ravyn Lenae"
+    },
+
+    {
+        id: "2oAE6v92E9WUEILL0LFQAR",
+        title: "End of Beginning",
+        artist: "Djo"
+    }
+
+];
+
+
+/*
+   ======================================================
+   SECRET SONG
+   ======================================================
+
+   NEVER randomly selected before birthday.
+*/
+
+const secretSong = {
+
+    id: "3eBUZy4oiQGhOMirK5cZmO",
+
+    title: "Thick Of It",
+
+    artist: "KSI"
+
+};
+
+
+/* =====================================================
+   GLOBAL VARIABLES
+===================================================== */
+
+let spotifyAPI = null;
+
+let spotifyController = null;
+
+let birthdayUnlocked = false;
+
+let spotifyReady = false;
+
+
+/* =====================================================
+   BIRTHDAY CHECK
+===================================================== */
+
+function isBirthdayUnlocked() {
+
+    return new Date() >= birthday;
+
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+function updateCountdown() {
+
+    const now =
+        new Date();
+
+    const difference =
+        birthday.getTime() -
+        now.getTime();
+
+
+    if (difference <= 0) {
+
+        unlockBirthday();
+
+        return;
+    }
+
+
+    const totalSeconds =
+        Math.floor(
+            difference / 1000
+        );
+
+
+    const days =
+        Math.floor(
+            totalSeconds / 86400
+        );
+
+
+    const hours =
+        Math.floor(
+            (totalSeconds % 86400)
+            / 3600
+        );
+
+
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600)
+            / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        String(days).padStart(
+            2,
+            "0"
+        );
+
+
+    document.getElementById(
+        "hours"
+    ).textContent =
+        String(hours).padStart(
+            2,
+            "0"
+        );
+
+
+    document.getElementById(
+        "minutes"
+    ).textContent =
+        String(minutes).padStart(
+            2,
+            "0"
+        );
+
+
+    document.getElementById(
+        "seconds"
+    ).textContent =
+        String(seconds).padStart(
+            2,
+            "0"
+        );
+
+}
+
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+updateCountdown();
+
+
+/* =====================================================
+   UNLOCK BIRTHDAY
+===================================================== */
+
+function unlockBirthday() {
+
+    if (birthdayUnlocked) {
+        return;
+    }
+
+
+    birthdayUnlocked = true;
+
+
+    document.getElementById(
+        "days"
+    ).textContent = "00";
+
+
+    document.getElementById(
+        "hours"
+    ).textContent = "00";
+
+
+    document.getElementById(
+        "minutes"
+    ).textContent = "00";
+
+
+    document.getElementById(
+        "seconds"
+    ).textContent = "00";
+
+
+    document.getElementById(
+        "lockIcon"
+    ).textContent =
+        "🔓";
+
+
+    document.getElementById(
+        "lockText"
+    ).textContent =
+        "THE BIRTHDAY SURPRISE IS UNLOCKED!";
+
+
+    document.getElementById(
+        "topBadge"
+    ).textContent =
+        "🎉 Birthday Unlocked";
+
+
+    const birthdaySection =
+        document.getElementById(
+            "birthdayUnlocked"
+        );
+
+
+    birthdaySection.style.display =
+        "block";
+
+
+    /*
+       If Spotify is already ready,
+       switch the player to the secret song.
+    */
+
+    if (
+        spotifyReady &&
+        spotifyController
+    ) {
+
+        spotifyController.loadEntity(
+            "spotify:track:" +
+            secretSong.id
+        );
+
+    }
+
+
+    /*
+       Celebration particles.
+    */
+
+    for (
+        let i = 0;
+        i < 60;
+        i++
+    ) {
+
+        createParticle(true);
+
+    }
+
+}
+
+
+/* =====================================================
+   SPOTIFY API READY
+===================================================== */
+
+window.onSpotifyIframeApiReady =
+    function(IFrameAPI) {
+
+        spotifyAPI =
+            IFrameAPI;
+
+        spotifyReady = true;
+
+
+        /*
+           Birthday has priority.
+        */
+
+        if (
+            isBirthdayUnlocked()
+        ) {
+
+            createBirthdayPlayer();
+
+            unlockBirthday();
+
+        } else {
+
+            createCountdownPlayer();
+
+        }
+
+    };
+
+
+/* =====================================================
+   CREATE COUNTDOWN PLAYER
+===================================================== */
+
+function createCountdownPlayer() {
+
+    const element =
+        document.getElementById(
+            "spotifyEmbed"
+        );
+
+
+    if (
+        !element ||
+        !spotifyAPI
+    ) {
+
+        return;
+    }
+
+
+    /*
+       IMPORTANT:
+       This function can ONLY choose
+       from preBirthdaySongs.
+    */
+
+    const song =
+        getRandomSong();
+
+
+    showNowPlaying(song);
+
+
+    spotifyAPI.createController(
+
+        element,
+
+        {
+
+            width: "100%",
+
+            height: 152,
+
+            uri:
+                "spotify:track:" +
+                song.id
+
+        },
+
+        function(controller) {
+
+            spotifyController =
+                controller;
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   CREATE BIRTHDAY PLAYER
+===================================================== */
+
+function createBirthdayPlayer() {
+
+    const element =
+        document.getElementById(
+            "birthdaySpotify"
+        );
+
+
+    if (
+        !element ||
+        !spotifyAPI
+    ) {
+
+        return;
+    }
+
+
+    spotifyAPI.createController(
+
+        element,
+
+        {
+
+            width: "100%",
+
+            height: 152,
+
+            uri:
+                "spotify:track:" +
+                secretSong.id
+
+        },
+
+        function(controller) {
+
+            /*
+               This is the dedicated birthday
+               player for Thick Of It.
+            */
+
+            controller.loadEntity(
+                "spotify:track:" +
+                secretSong.id
+            );
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   RANDOM SONG
+===================================================== */
+
+function getRandomSong() {
+
+    /*
+       EXTRA SAFETY:
+       Never allow secret song before birthday.
+    */
+
+    if (
+        isBirthdayUnlocked()
+    ) {
+
+        return preBirthdaySongs[
+            Math.floor(
+                Math.random() *
+                preBirthdaySongs.length
+            )
+        ];
+
+    }
+
+
+    const index =
+        Math.floor(
+            Math.random() *
+            preBirthdaySongs.length
+        );
+
+
+    return preBirthdaySongs[index];
+
+}
+
+
+/* =====================================================
+   NOW PLAYING
+===================================================== */
+
+function showNowPlaying(song) {
+
+    document.getElementById(
+        "nowPlaying"
+    ).textContent =
+        "🎲 Selected: " +
+        song.title +
+        " — " +
+        song.artist;
+
+}
+
+
+/* =====================================================
+   SHUFFLE
+===================================================== */
+
+function shuffleSong() {
+
+    /*
+       Once birthday arrives,
+       don't randomly change the secret song.
+    */
+
+    if (
+        birthdayUnlocked ||
+        isBirthdayUnlocked()
+    ) {
+
+        showModal(
+
+            "🎂",
+
+            "Birthday Mode",
+
+            "The countdown is finished. Her secret song is now unlocked! ❤️"
+
+        );
+
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "shuffleButton"
+        );
+
+
+    button.classList.add(
+        "opening"
+    );
+
+
+    setTimeout(
+        () => {
+
+            button.classList.remove(
+                "opening"
+            );
+
+        },
+        650
+    );
+
+
+    const song =
+        getRandomSong();
+
+
+    showNowPlaying(song);
+
+
+    /*
+       Change the current Spotify player.
+    */
+
+    if (spotifyController) {
+
+        spotifyController.loadEntity(
+
+            "spotify:track:" +
+            song.id
+
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOCKED BUTTONS
+===================================================== */
+
+function openLocked(type, button) {
+
+    /*
+       Button ripple.
+    */
+
+    if (button) {
+
+        button.classList.add(
+            "opening"
+        );
+
+
+        setTimeout(
+            () => {
+
+                button.classList.remove(
+                    "opening"
+                );
+
+            },
+            650
+        );
+
+    }
+
+
+    /*
+       Birthday version.
+    */
+
+    if (
+        birthdayUnlocked ||
+        isBirthdayUnlocked()
+    ) {
+
+        if (type === "letter") {
+
+            showModal(
+                "💌",
+                "The Letter Is Open",
+                "The birthday surprise has arrived. ❤️"
+            );
+
+        }
+
+
+        if (type === "gift") {
+
+            showModal(
+                "🎁",
+                "Mystery Gift Unlocked",
+                "The gift box is finally ready. 🎉"
+            );
+
+        }
+
+
+        if (type === "memories") {
+
+            showModal(
+                "📸",
+                "Memories Unlocked",
+                "The hidden memories are finally available. ❤️"
+            );
+
+        }
+
+
+        if (type === "song") {
+
+            showModal(
+                "🎵",
+                "Secret Song Unlocked",
+                "Thick Of It — KSI is finally unlocked. 🔓"
+            );
+
+        }
+
+
+        return;
+    }
+
+
+    /*
+       BEFORE BIRTHDAY
+    */
+
+    if (type === "letter") {
+
+        showModal(
+            "💌",
+            "The Letter Is Sealed",
+            "A message is waiting for you... but the seal only opens on September 5. 🔒"
+        );
+
+    }
+
+
+    if (type === "gift") {
+
+        showModal(
+            "🎁",
+            "Nice Try 👀",
+            "You found the mystery gift! Unfortunately, it is still locked. Come back on September 5."
+        );
+
+    }
+
+
+    if (type === "memories") {
+
+        showModal(
+            "📸",
+            "Memories Locked",
+            "The memories are being kept safe until the birthday surprise is unlocked."
+        );
+
+    }
+
+
+    if (type === "song") {
+
+        showModal(
+            "🔐",
+            "The Secret Song",
+            "One special song has been removed from the countdown playlist. It unlocks on September 5. 🎵"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function showModal(
+    icon,
+    title,
+    text
+) {
+
+    document.getElementById(
+        "modalIcon"
+    ).textContent =
+        icon;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        title;
+
+
+    document.getElementById(
+        "modalText"
+    ).textContent =
+        text;
+
+
+    document.getElementById(
+        "modal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function closeModal() {
+
+    document.getElementById(
+        "modal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/*
+   Close modal by clicking outside.
+*/
+
+document.getElementById(
+    "modal"
+).addEventListener(
+    "click",
+    function(e) {
+
+        if (
+            e.target === this
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FLOATING PARTICLES
+===================================================== */
+
+function createParticle(
+    force = false
+) {
+
+    const particle =
+        document.createElement(
+            "div"
+        );
+
+
+    particle.className =
+        "particle";
+
+
+    const choices = [
+
+        "❤️",
+        "💗",
+        "✨",
+        "💖",
+        "⭐",
+        "🎈"
+
+    ];
+
+
+    particle.textContent =
+        choices[
+            Math.floor(
+                Math.random() *
+                choices.length
+            )
+        ];
+
+
+    particle.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    particle.style.fontSize =
+        (
+            12 +
+            Math.random() * 20
+        ) +
+        "px";
+
+
+    particle.style.animationDuration =
+        (
+            force
+                ? 2
+                : 5 +
+                  Math.random() * 6
+        ) +
+        "s";
+
+
+    document.getElementById(
+        "particles"
+    ).appendChild(
+        particle
+    );
+
+
+    setTimeout(
+        () => {
+
+            particle.remove();
+
+        },
+        10000
+    );
+
+}
+
+
+setInterval(
+    () => createParticle(),
+    800
+);
+
+
+/* =====================================================
+   SECRET SONG SAFETY
+===================================================== */
+
+function canPlaySecretSong() {
+
+    return isBirthdayUnlocked();
+
+}
+
+
+/* =====================================================
+   FINAL STARTUP CHECK
+===================================================== */
+
+if (
+    isBirthdayUnlocked()
+) {
+
+    /*
+       Don't wait for the countdown
+       to discover the birthday.
+    */
+
+    unlockBirthday();
+
+}
+
+</script>
+
+
+</body>
+</html>
